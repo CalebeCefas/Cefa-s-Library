@@ -440,7 +440,7 @@ int main()
         }
     } 
     
-    else if(op == 2) 
+    else if(op == 2) //opção cliente
     {
         do
         {
