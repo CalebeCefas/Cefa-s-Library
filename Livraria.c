@@ -44,24 +44,29 @@ void pesquisarLivro(struct Livro livros[], int quantidadeTotal, char parametro[]
     }
 }
 
-void removerLivro(struct Livro livros[], int quantidadeTotal, char parametro[], char tipoBusca[]) //função de remover livro no sistema
+void removerLivro(struct Livro livros[], int *quantidadeTotal, char parametro[], char tipoBusca[]) //função de remover livro no sistema
 {
-    int encontrado = 0; //já é atribuído o valor de 0 como se o livro não existisse no sistema
+    int encontrado = 0;
 
-    for (int i = 0; i < quantidadeTotal; i++) //a repetição passa de livro por livro cadastrado
+    for (int i = 0; i < *quantidadeTotal; i++) 
     {
         if ((strcmp(tipoBusca, "titulo") == 0 && strcasecmp(livros[i].titulo, parametro) == 0) ||
-            (strcmp(tipoBusca, "isbn") == 0 && strcasecmp(livros[i].isbn, parametro) == 0)) //a condição verifica se o parametro e o tipo de busca são iguais
+            (strcmp(tipoBusca, "isbn") == 0 && strcasecmp(livros[i].isbn, parametro) == 0)) 
         {
-            
-            printf("\n\nRemovendo livro %s do sistema\n...\n...\n...\nLivro removido com sucesso", parametro);
-            
+            printf("\n\nRemovendo livro '%s' do sistema\n...\n...\n...\nLivro removido com sucesso.\n", livros[i].titulo);
+
+            for (int j = i; j < *quantidadeTotal - 1; j++) // Desloca os livros subsequentes para preencher o espaço do livro removido
+            {
+                livros[j] = livros[j + 1];
+            }
+
+            (*quantidadeTotal)--; // Diminui o contador total de livros no valor original(fora da função, por isso se usa o ponteiro)
             encontrado = 1;
-            break;  // Encerra o loop ao encontrar o livro
+            break;
         }
     }
 
-    if (!encontrado)  // Se Encontrado=0, quer dizer que o sistema não encontrou o livro
+    if (!encontrado) 
     { 
         printf("\nLivro não encontrado.\n");
     }
@@ -265,6 +270,31 @@ float receita(struct Livro livros[], int quantidadeTotal)
     return receitaTotal;
 }
 
+void listarLivros(struct Livro livros[], int quantidadeTotal, char parametro[], char tipoBusca[]) //função de listar livro por autor ou gênero
+{
+    int encontrado = 0; //já é atribuído o valor de 0 como se o livro não existisse no sistema
+    int numero = 1;
+
+    printf("Livros de %s...\n", parametro);
+
+    for (int i = 0; i < quantidadeTotal; i++) //a repetição passa de livro por livro cadastrado
+    {
+        if ((strcmp(tipoBusca, "genero") == 0 && strcasecmp(livros[i].genero, parametro) == 0) ||
+            (strcmp(tipoBusca, "gênero") == 0 && strcasecmp(livros[i].genero, parametro) == 0) ||
+            (strcmp(tipoBusca, "autor") == 0 && strcasecmp(livros[i].autor, parametro) == 0)) //a condição verifica se o parametro e o tipo de busca são iguais
+        {
+            
+            printf("%d - %s\n", numero, livros[i].titulo);
+            encontrado = 1;
+        }
+    }
+
+    if (!encontrado)  // Se Encontrado=0, quer dizer que o sistema não encontrou os livros
+    { 
+        printf("\nLivros de %s não encontrado.\n", parametro);
+    }
+}
+
 
 int main() 
 {
@@ -278,10 +308,31 @@ int main()
     {"O Hobbit", "J.R.R. Tolkien", "Fantasia", "2233445566778", 12, 44.90},
     {"Orgulho e Preconceito", "Jane Austen", "Romance", "3344556677889", 9, 38.50},
     {"Cem Anos de Solidão", "Gabriel García Márquez", "Realismo Mágico", "5566778899001", 8, 48.90},
-    {"Moby Dick", "Herman Melville", "Aventura", "6677889900112", 4, 52.30}
-    };
+    {"Moby Dick", "Herman Melville", "Aventura", "6677889900112", 4, 52.30},
+    {"O Nome da Rosa", "Umberto Eco", "Mistério", "7788990011223", 10, 46.50},
+    {"As Crônicas de Nárnia", "C.S. Lewis", "Fantasia", "8899001122334", 12, 49.90},
+    {"O Apanhador no Campo de Centeio", "J.D. Salinger", "Romance", "9900112233445", 6, 42.00},
+    {"Guerra e Paz", "Liev Tolstói", "Romance", "1011121314156", 5, 65.90},
+    {"O Conde de Monte Cristo", "Alexandre Dumas", "Aventura", "1213141516178", 7, 57.20},
+    {"A Ilíada", "Homero", "Épico", "1314151617189", 4, 60.00},
+    {"Ulisses", "James Joyce", "Modernismo", "1415161718190", 3, 55.40},
+    {"Alice no País das Maravilhas", "Lewis Carroll", "Fantasia", "1516171819201", 8, 32.50},
+    {"Drácula", "Bram Stoker", "Terror", "1617181920212", 5, 50.60},
+    {"Os Miseráveis", "Victor Hugo", "Drama", "1718192021223", 6, 58.80},
+    {"Frankenstein", "Mary Shelley", "Ficção Científica", "1819202122234", 7, 37.90},
+    {"O Grande Gatsby", "F. Scott Fitzgerald", "Romance", "1920212223245", 9, 41.20},
+    {"A Divina Comédia", "Dante Alighieri", "Épico", "2021222324256", 3, 64.70},
+    {"O Morro dos Ventos Uivantes", "Emily Brontë", "Romance", "2122232425267", 5, 45.80},
+    {"A Metamorfose", "Franz Kafka", "Ficção", "2223242526278", 8, 36.40},
+    {"Os Três Mosqueteiros", "Alexandre Dumas", "Aventura", "2324252627289", 7, 44.50},
+    {"O Retrato de Dorian Gray", "Oscar Wilde", "Ficção", "2425262728290", 6, 39.80},
+    {"O Sol é Para Todos", "Harper Lee", "Romance", "2526272829301", 10, 46.70},
+    {"A Montanha Mágica", "Thomas Mann", "Modernismo", "2627282930312", 4, 60.90},
+    {"O Som e a Fúria", "William Faulkner", "Modernismo", "2728293031323", 3, 49.90},
+    {"As Vinhas da Ira", "John Steinbeck", "Drama", "2829303132334", 5, 43.30}
+}; //livros cadastrados no sistema
 
-    int quantidadeTotal = 10; //vamos fazer de conta que exista apenas 10 livros no sistema da livraria
+    int quantidadeTotal = 30; //vamos fazer de conta que exista apenas 30 livros no sistema da livraria
     int senha = 123, senhaUsuario;
     char repetir;
 
@@ -319,7 +370,8 @@ int main()
             {
                 int opp;
                 printf("\nO que deseja fazer?");
-                printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n2 - Remover livro do sistema\n3 - Disponibilidade de exemplar\n4 - Registro de venda");
+                printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n2 - Remover livro do sistema\n3 - Disponibilidade de exemplar\n");
+                printf("4 - Registro de venda\n5 - Listar livros por autor ou genero");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
 
@@ -364,9 +416,19 @@ int main()
                     printf("Escreva o %s: ", tipoBusca);
                     scanf(" %[^\n]", parametro); //usuário digita o titulo ou isbn do livro
 
-                    venda(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de disponibilidade de livro no sistema
+                    venda(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de resgistrar venda
                 }
 
+                else if(opp == 5)
+                {
+                    char tipoBusca[10], parametro[100];
+                    printf("\nEscreva o tipo de busca (genero ou autor): ");
+                    scanf("%s", tipoBusca); //usuário escolhe o tipo de busca
+                    printf("Escreva o %s: ", tipoBusca);
+                    scanf(" %[^\n]", parametro); //usuário digita o titulo ou isbn do livro
+
+                    listarLivros(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de listar livros por genero ou autor
+                }
 
                 printf("\nDeseja algo mais?(s/n) ");
                 scanf("%s", &repetir);
@@ -446,7 +508,7 @@ int main()
         {
             int opp;
             printf("\nQuerido cliente, o que deseja fazer?");
-            printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n");
+            printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n2 - Listar livros por autor ou genero");
             printf("Digite: ");
             scanf("%d", &opp); //usuário escolhe oque ele quer fazer no sistema
 
@@ -460,6 +522,17 @@ int main()
 
                 pesquisarLivro(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de pesquisa de livro no sistema
             }
+
+            else if(opp == 2)
+                {
+                    char tipoBusca[10], parametro[100];
+                    printf("\nEscreva o tipo de busca (genero ou autor): ");
+                    scanf("%s", tipoBusca); //usuário escolhe o tipo de busca
+                    printf("Escreva o %s: ", tipoBusca);
+                    scanf(" %[^\n]", parametro); //usuário digita o titulo ou isbn do livro
+
+                    listarLivros(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de listar livros por genero ou autor
+                }
 
             printf("\nDeseja algo mais?(s/n) ");
             scanf("%s", &repetir);
