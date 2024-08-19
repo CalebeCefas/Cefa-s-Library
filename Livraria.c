@@ -60,7 +60,7 @@ void removerLivro(struct Livro livros[], int *quantidadeTotal, char parametro[],
                 livros[j] = livros[j + 1];
             }
 
-            (*quantidadeTotal)--; // Diminui o contador total de livros no valor original(fora da função, por isso se usa o ponteiro)
+            (*quantidadeTotal)--; // Diminui o contador total de livros
             encontrado = 1;
             break;
         }
@@ -285,6 +285,7 @@ void listarLivros(struct Livro livros[], int quantidadeTotal, char parametro[], 
         {
             
             printf("%d - %s\n", numero, livros[i].titulo);
+            numero++;
             encontrado = 1;
         }
     }
@@ -299,36 +300,36 @@ void listarLivros(struct Livro livros[], int quantidadeTotal, char parametro[], 
 int main() 
 {
     struct Livro livros[] = {
-    {"O Senhor dos Anéis", "J.R.R. Tolkien", "Fantasia", "1234567890123", 10, 59.90},
+    {"O Senhor dos Aneis", "J.R.R. Tolkien", "Fantasia", "1234567890123", 10, 59.90},
     {"1984", "George Orwell", "Distopia", "9876543210987", 8, 45.50},
-    {"A Revolução dos Bichos", "George Orwell", "Sátira", "1122334455667", 5, 39.90},
+    {"A Revolucao dos Bichos", "George Orwell", "Sátira", "1122334455667", 5, 39.90},
     {"Dom Quixote", "Miguel de Cervantes", "Clássico", "1234432112344", 7, 49.90},
-    {"O Pequeno Príncipe", "Antoine de Saint-Exupéry", "Fábula", "9988776655443", 15, 29.90},
+    {"O Pequeno Principe", "Antoine de Saint-Exupéry", "Fábula", "9988776655443", 15, 29.90},
     {"Crime e Castigo", "Fiódor Dostoiévski", "Romance", "4455667788991", 6, 54.80},
     {"O Hobbit", "J.R.R. Tolkien", "Fantasia", "2233445566778", 12, 44.90},
     {"Orgulho e Preconceito", "Jane Austen", "Romance", "3344556677889", 9, 38.50},
-    {"Cem Anos de Solidão", "Gabriel García Márquez", "Realismo Mágico", "5566778899001", 8, 48.90},
+    {"Cem Anos de Solidao", "Gabriel García Márquez", "Realismo Mágico", "5566778899001", 8, 48.90},
     {"Moby Dick", "Herman Melville", "Aventura", "6677889900112", 4, 52.30},
     {"O Nome da Rosa", "Umberto Eco", "Mistério", "7788990011223", 10, 46.50},
-    {"As Crônicas de Nárnia", "C.S. Lewis", "Fantasia", "8899001122334", 12, 49.90},
+    {"As Cronicas de Narnia", "C.S. Lewis", "Fantasia", "8899001122334", 12, 49.90},
     {"O Apanhador no Campo de Centeio", "J.D. Salinger", "Romance", "9900112233445", 6, 42.00},
     {"Guerra e Paz", "Liev Tolstói", "Romance", "1011121314156", 5, 65.90},
     {"O Conde de Monte Cristo", "Alexandre Dumas", "Aventura", "1213141516178", 7, 57.20},
-    {"A Ilíada", "Homero", "Épico", "1314151617189", 4, 60.00},
+    {"A Iliada", "Homero", "Épico", "1314151617189", 4, 60.00},
     {"Ulisses", "James Joyce", "Modernismo", "1415161718190", 3, 55.40},
-    {"Alice no País das Maravilhas", "Lewis Carroll", "Fantasia", "1516171819201", 8, 32.50},
-    {"Drácula", "Bram Stoker", "Terror", "1617181920212", 5, 50.60},
-    {"Os Miseráveis", "Victor Hugo", "Drama", "1718192021223", 6, 58.80},
+    {"Alice no Pais das Maravilhas", "Lewis Carroll", "Fantasia", "1516171819201", 8, 32.50},
+    {"Dracula", "Bram Stoker", "Terror", "1617181920212", 5, 50.60},
+    {"Os Miseraveis", "Victor Hugo", "Drama", "1718192021223", 6, 58.80},
     {"Frankenstein", "Mary Shelley", "Ficção Científica", "1819202122234", 7, 37.90},
     {"O Grande Gatsby", "F. Scott Fitzgerald", "Romance", "1920212223245", 9, 41.20},
-    {"A Divina Comédia", "Dante Alighieri", "Épico", "2021222324256", 3, 64.70},
+    {"A Divina Comedia", "Dante Alighieri", "Épico", "2021222324256", 3, 64.70},
     {"O Morro dos Ventos Uivantes", "Emily Brontë", "Romance", "2122232425267", 5, 45.80},
     {"A Metamorfose", "Franz Kafka", "Ficção", "2223242526278", 8, 36.40},
-    {"Os Três Mosqueteiros", "Alexandre Dumas", "Aventura", "2324252627289", 7, 44.50},
+    {"Os Tres Mosqueteiros", "Alexandre Dumas", "Aventura", "2324252627289", 7, 44.50},
     {"O Retrato de Dorian Gray", "Oscar Wilde", "Ficção", "2425262728290", 6, 39.80},
-    {"O Sol é Para Todos", "Harper Lee", "Romance", "2526272829301", 10, 46.70},
-    {"A Montanha Mágica", "Thomas Mann", "Modernismo", "2627282930312", 4, 60.90},
-    {"O Som e a Fúria", "William Faulkner", "Modernismo", "2728293031323", 3, 49.90},
+    {"O Sol e Para Todos", "Harper Lee", "Romance", "2526272829301", 10, 46.70},
+    {"A Montanha Magica", "Thomas Mann", "Modernismo", "2627282930312", 4, 60.90},
+    {"O Som e a Furia", "William Faulkner", "Modernismo", "2728293031323", 3, 49.90},
     {"As Vinhas da Ira", "John Steinbeck", "Drama", "2829303132334", 5, 43.30}
 }; //livros cadastrados no sistema
 
@@ -394,7 +395,7 @@ int main()
                     printf("Escreva o %s: ", tipoBusca);
                     scanf(" %[^\n]", parametro); //usuário digita o titulo ou isbn do livro
 
-                    removerLivro(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de pesquisa de livro no sistema
+                    removerLivro(livros, &quantidadeTotal, parametro, tipoBusca); //chama a função de pesquisa de livro no sistema
                 }
 
                 else if(opp == 3) //opção de quantidade de exemplares de um livro a loja possui
