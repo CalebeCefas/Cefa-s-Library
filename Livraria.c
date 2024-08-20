@@ -183,7 +183,7 @@ float receita(struct Livro livros[], int quantidadeTotal)
                 printf("Quantos livros serão vendidos? ");
                 if (scanf("%d", &exemplares) != 1 || exemplares < 0) //define quantos exemplares serão contados e compara se é válido(aior que 0)
                 {
-                    printf("Quantidade inválida. Por favor, insira um número inteiro positivo.\n");
+                    printf("Quantidade invalida. Por favor, insira um número inteiro positivo.\n");
                     return receitaTotal;
                 }
 
@@ -235,7 +235,7 @@ float receita(struct Livro livros[], int quantidadeTotal)
                     printf("Quantos livros serão vendidos? ");
                     if (scanf("%d", &exemplares) != 1 || exemplares < 0) 
                     {
-                        printf("Quantidade inválida. Por favor, insira um número inteiro positivo.\n");
+                        printf("Quantidade invalida. Por favor, insira um número inteiro positivo.\n");
                         return receitaTotal;
                     }
 
@@ -264,7 +264,7 @@ float receita(struct Livro livros[], int quantidadeTotal)
     }
     else 
     {
-        printf("Opção inválida.\n");
+        printf("Opção invalida.\n");
     }
 
     return receitaTotal;
@@ -350,6 +350,14 @@ int main()
     printf("\n1 - Funcionario\n2 - Cliente\nDigite a opcao: ");
     scanf("%d", &op);
 
+    while(op>2 || op<1)
+        {
+            printf("Opção invalida, tente novamente: ");
+            scanf("%d", &op);
+        }
+
+    
+
     if(op == 1) 
     {
         printf("\nAntes de prosseguirmos, precisamos que voce digite a senha do sistema: ");
@@ -365,6 +373,12 @@ int main()
         printf("\nQual o seu setor?\n1 - Vendedor\n2 - Administracao\n3 - Estoque\nDigite: ");
         scanf("%d", &setor); //usuário digita qual setor ele pertence
 
+        while(setor>3 || setor<1)
+        {
+            printf("Opção invalida, tente novamente: ");
+            scanf("%d", &setor);
+        }
+
         if(setor == 1) //opção de vendedor
         {
             do
@@ -375,6 +389,12 @@ int main()
                 printf("4 - Registro de venda\n5 - Listar livros por autor ou genero");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
+
+                while(opp>5 || opp<1)
+            {
+                printf("Opção invalida, tente novamente: ");
+                scanf("%d", &opp);
+            }
 
                 if(opp == 1) //opção de pesquisar o livro no sistema
                 {
@@ -448,6 +468,12 @@ int main()
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
 
+                while(opp>1 || opp<1)
+            {
+                printf("Opção invalida, tente novamente: ");
+                scanf("%d", &opp);
+            }
+
                 if(opp == 1) 
                 {
                     float total = receita(livros, quantidadeTotal);
@@ -471,6 +497,12 @@ int main()
                 printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n2 - Reabastecer estoque");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
+
+                while(opp>2 || opp<1)
+            {
+                printf("Opção invalida, tente novamente: ");
+                scanf("%d", &opp);
+            }
 
                 if(opp == 1) //opção de pesquisar o livro no sistema
                 {
@@ -510,8 +542,14 @@ int main()
             int opp;
             printf("\nQuerido cliente, o que deseja fazer?");
             printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n2 - Listar livros por autor ou genero");
-            printf("Digite: ");
+            printf("\nDigite: ");
             scanf("%d", &opp); //usuário escolhe oque ele quer fazer no sistema
+
+            while(opp>2 || opp<1)
+            {
+                printf("Opção invalida, tente novamente: ");
+                scanf("%d", &opp);
+            }
 
             if(opp == 1) //opção de pesquisar o livro no sistema
             {
@@ -541,11 +579,5 @@ int main()
         }while (repetir == 's');
     } 
     
-    else 
-    {
-        printf("OPÇÃO INVÁLIDA"); //se o usuário escolher uma opção fora do apresentado (funcionário ou cliente)
-        return 1;
-    }
-
     return 0;
 }
