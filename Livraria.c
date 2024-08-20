@@ -347,12 +347,12 @@ int main()
     int op;
 
     printf("\nAntes de prosseguirmos, precisamos saber se voce eh funcionario ou cliente...");
-    printf("\n1 - Funcionario\n2 - Cliente\nDigite a opcao: ");
+    printf("\n[1] - Funcionario\n[2] - Cliente\nDigite a opcao: ");
     scanf("%d", &op);
 
     while(op>2 || op<1)
         {
-            printf("Opção invalida, tente novamente: ");
+            printf("\nOpção invalida, tente novamente: ");
             scanf("%d", &op);
         }
 
@@ -365,12 +365,12 @@ int main()
 
         while (senha != senhaUsuario)
         {
-            printf("Senha incorreta, tente novamente: ");
+            printf("\nSenha incorreta, tente novamente: ");
             scanf("%d", &senhaUsuario);
         }
         
         int setor;
-        printf("\nQual o seu setor?\n1 - Vendedor\n2 - Administracao\n3 - Estoque\nDigite: ");
+        printf("\nQual o seu setor?\n[1] - Vendedor\n[2] - Administracao\n[3] - Estoque\nDigite: ");
         scanf("%d", &setor); //usuário digita qual setor ele pertence
 
         while(setor>3 || setor<1)
@@ -385,14 +385,14 @@ int main()
             {
                 int opp;
                 printf("\nO que deseja fazer?");
-                printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n2 - Remover livro do sistema\n3 - Disponibilidade de exemplar\n");
-                printf("4 - Registro de venda\n5 - Listar livros por autor ou genero");
+                printf("\n\n\tMENU\n\n[1] - Pesquisar dados de livro\n[2] - Remover livro do sistema\n[3] - Disponibilidade de exemplar\n");
+                printf("[4] - Registro de venda\n[5] - Listar livros por autor ou genero");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
 
                 while(opp>5 || opp<1)
             {
-                printf("Opção invalida, tente novamente: ");
+                printf("\nOpção invalida, tente novamente: ");
                 scanf("%d", &opp);
             }
 
@@ -464,13 +464,13 @@ int main()
             {
                 int opp;
                 printf("\nO que deseja fazer?");
-                printf("\n\n\tMENU\n\n1 - Calcular Receita");
+                printf("\n\n\tMENU\n\n[1] - Calcular Receita");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
 
                 while(opp>1 || opp<1)
             {
-                printf("Opção invalida, tente novamente: ");
+                printf("\nOpção invalida, tente novamente: ");
                 scanf("%d", &opp);
             }
 
@@ -494,13 +494,13 @@ int main()
             {
                 int opp;
                 printf("\nO que deseja fazer?");
-                printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n2 - Reabastecer estoque");
+                printf("\n\n\tMENU\n\n[1] - Pesquisar dados de livro\n[2] - Reabastecer estoque");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
 
                 while(opp>2 || opp<1)
             {
-                printf("Opção invalida, tente novamente: ");
+                printf("\nOpção invalida, tente novamente: ");
                 scanf("%d", &opp);
             }
 
@@ -541,13 +541,13 @@ int main()
         {
             int opp;
             printf("\nQuerido cliente, o que deseja fazer?");
-            printf("\n\n\tMENU\n\n1 - Pesquisar dados de livro\n2 - Listar livros por autor ou genero");
+            printf("\n\n\tMENU\n\n[1] - Pesquisar dados de livro\n[2] - Listar livros por autor ou genero");
             printf("\nDigite: ");
             scanf("%d", &opp); //usuário escolhe oque ele quer fazer no sistema
 
             while(opp>2 || opp<1)
             {
-                printf("Opção invalida, tente novamente: ");
+                printf("\nOpção invalida, tente novamente: ");
                 scanf("%d", &opp);
             }
 
