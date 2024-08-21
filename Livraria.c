@@ -356,8 +356,6 @@ int main()
             scanf("%d", &op);
         }
 
-    
-
     if(op == 1) 
     {
         printf("\nAntes de prosseguirmos, precisamos que voce digite a senha do sistema: ");
@@ -368,9 +366,11 @@ int main()
             printf("\nSenha incorreta, tente novamente: ");
             scanf("%d", &senhaUsuario);
         }
+
+        system("cls");
         
         int setor;
-        printf("\nQual o seu setor?\n[1] - Vendedor\n[2] - Administracao\n[3] - Estoque\nDigite: ");
+        printf("Qual o seu setor?\n[1] - Vendedor\n[2] - Administracao\n[3] - Estoque\nDigite: ");
         scanf("%d", &setor); //usuário digita qual setor ele pertence
 
         while(setor>3 || setor<1)
@@ -454,6 +454,8 @@ int main()
                 printf("\nDeseja algo mais?(s/n) ");
                 scanf("%s", &repetir);
 
+                system("cls");
+
             }while (repetir == 's');
             
         }
@@ -484,6 +486,8 @@ int main()
                 printf("\nDeseja algo mais?(s/n) ");
                 scanf("%s", &repetir);
 
+                system("cls");
+
             }while (repetir == 's');
 
         }
@@ -493,7 +497,6 @@ int main()
             do
             {
                 int opp;
-                printf("\nO que deseja fazer?");
                 printf("\n\n\tMENU\n\n[1] - Pesquisar dados de livro\n[2] - Reabastecer estoque");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
@@ -530,6 +533,8 @@ int main()
                 printf("\nDeseja algo mais?(s/n) ");
                 scanf("%s", &repetir);
 
+                system("cls");
+
             }while (repetir == 's');
 
         }
@@ -540,7 +545,7 @@ int main()
         do
         {
             int opp;
-            printf("\nQuerido cliente, o que deseja fazer?");
+            printf("Querido cliente, o que deseja fazer?");
             printf("\n\n\tMENU\n\n[1] - Pesquisar dados de livro\n[2] - Listar livros por autor ou genero");
             printf("\nDigite: ");
             scanf("%d", &opp); //usuário escolhe oque ele quer fazer no sistema
@@ -575,6 +580,8 @@ int main()
 
             printf("\nDeseja algo mais?(s/n) ");
             scanf("%s", &repetir);
+
+            system("cls");
 
         }while (repetir == 's');
     } 
