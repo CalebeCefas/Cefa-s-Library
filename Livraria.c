@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>  // Para usar strcasecmp
 
-struct Livro 
+struct Livro //cria uma estruct para armazenar informações de livros
 {
     char titulo[100];
     char autor[100];
@@ -66,7 +66,7 @@ void removerLivro(struct Livro livros[], int *quantidadeTotal, char parametro[],
         }
     }
 
-    if (!encontrado) 
+    if (!encontrado) // Se Encontrado=0, quer dizer que o sistema não encontrou o livro
     { 
         printf("\nLivro não encontrado.\n");
     }
@@ -152,7 +152,7 @@ void venda(struct Livro livros[], int quantidadeTotal, char parametro[], char ti
 float receita(struct Livro livros[], int quantidadeTotal) 
 {
     int op;
-    float receitaTotal = 0.0;
+    float receitaTotal = 0;
 
     printf("\nDeseja calcular a receita de qual tipo?\n1 - Um livro\n2 - Vários livros\nDigite: ");
     scanf("%d", &op);
@@ -202,7 +202,7 @@ float receita(struct Livro livros[], int quantidadeTotal)
             }
         }
 
-        if (!encontrado) 
+        if (!encontrado) // Se Encontrado=0, quer dizer que o sistema não encontrou o livro
         { 
             printf("Livro não encontrado.\n");
         }
@@ -227,6 +227,7 @@ float receita(struct Livro livros[], int quantidadeTotal)
             }
 
             encontrado = 0;
+
             for (int i = 0; i < quantidadeTotal; i++) 
             {
                 if ((strcasecmp(livros[i].titulo, parametro) == 0) ||
@@ -245,6 +246,7 @@ float receita(struct Livro livros[], int quantidadeTotal)
                         receitaTotal += receitaParcial;
                         printf("Receita para %d exemplares do livro %s: R$ %.2f\n", exemplares, parametro, receitaParcial);
                     } 
+
                     else 
                     {
                         printf("Quantidade de exemplares insuficiente para o livro %s.\n", parametro);
@@ -255,7 +257,7 @@ float receita(struct Livro livros[], int quantidadeTotal)
                 }
             }
 
-            if (!encontrado) 
+            if (!encontrado) // Se Encontrado=0, quer dizer que o sistema não encontrou o livro
             { 
                 printf("Livro não encontrado: %s.\n", parametro);
             }
@@ -348,32 +350,33 @@ void atualizarLivro(struct Livro livros[], int quantidadeTotal, char parametro[]
             if (opcao == 1) 
             {
                 printf("Digite o novo titulo: ");
-                scanf(" %[^\n]", livros[i].titulo);
+                scanf(" %[^\n]", livros[i].titulo); //armazena nova informação
             } 
 
             else if (opcao == 2) 
             {
                 printf("Digite o novo autor: ");
-                scanf(" %[^\n]", livros[i].autor);
+                scanf(" %[^\n]", livros[i].autor); //armazena nova informação
             } 
 
             else if (opcao == 3) 
             {
                 printf("Digite o novo genero: ");
-                scanf(" %[^\n]", livros[i].genero);
+                scanf(" %[^\n]", livros[i].genero); //armazena nova informação
             } 
 
             else if (opcao == 4) 
             {
                 printf("Digite o novo preco: ");
-                scanf("%f", &livros[i].preco);
+                scanf("%f", &livros[i].preco); //armazena nova informação
             } 
 
             else if (opcao == 5) 
             {
                 printf("Digite a nova quantidade: ");
-                scanf("%d", &livros[i].quantidade);
+                scanf("%d", &livros[i].quantidade); //armazena nova informação
             } 
+
             else 
             {
                 printf("Opção invalida.\n");
@@ -385,7 +388,8 @@ void atualizarLivro(struct Livro livros[], int quantidadeTotal, char parametro[]
         }
     }
 
-    if (!encontrado) {
+    if (!encontrado) // Se Encontrado=0, quer dizer que o sistema não encontrou o livro
+    {
         printf("Livro nao encontrado.\n");
     }
 }
@@ -484,10 +488,10 @@ int main()
                 scanf("%d", &opp);
 
                 while(opp>5 || opp<1)
-            {
-                printf("\nOpção invalida, tente novamente: ");
-                scanf("%d", &opp);
-            }
+                {
+                    printf("\nOpção invalida, tente novamente: ");
+                    scanf("%d", &opp);
+                }
 
                 if(opp == 1) //opção de pesquisar o livro no sistema
                 {
@@ -564,18 +568,18 @@ int main()
                 scanf("%d", &opp);
 
                 while(opp>3 || opp<1)
-            {
-                printf("\nOpção invalida, tente novamente: ");
-                scanf("%d", &opp);
-            }
-
-                if(opp == 1) 
                 {
-                    float total = receita(livros, quantidadeTotal);
+                    printf("\nOpção invalida, tente novamente: ");
+                    scanf("%d", &opp);
+                }
+
+                if(opp == 1) //opção de calcular receita 
+                {
+                    float total = receita(livros, quantidadeTotal); //armazena o retorno da função 'receita' em 'total'
                     printf("A livraria teve uma receita de R$ %.2f no período escolhido\n", total);
                 }
 
-                else if(opp == 2) 
+                else if(opp == 2) //opção de cadastrar novo livro
                 {
                     getchar(); // Limpa o buffer de entrada
                     cadastrarLivro(livros, &quantidadeTotal); // chama a função para cadastrar um novo livro
@@ -589,7 +593,7 @@ int main()
                     printf("Quantidade cadastrada: %d\n", livros[quantidadeTotal - 1].quantidade);
                 }
 
-                else if(opp == 3)
+                else if(opp == 3) //opção de atualizar certa informação de um livro
                 {
                     char tipoBusca[10], parametro[100];
                     printf("\nEscreva o tipo de busca (titulo ou isbn): ");
@@ -606,7 +610,6 @@ int main()
                 system("cls");
 
             }while (repetir == 's');
-
         }
 
         else if(setor == 3) //opção de estoque
@@ -619,10 +622,10 @@ int main()
                 scanf("%d", &opp);
 
                 while(opp>2 || opp<1)
-            {
-                printf("\nOpção invalida, tente novamente: ");
-                scanf("%d", &opp);
-            }
+                {
+                    printf("\nOpção invalida, tente novamente: ");
+                    scanf("%d", &opp);
+                }
 
                 if(opp == 1) //opção de pesquisar o livro no sistema
                 {
@@ -685,15 +688,15 @@ int main()
             }
 
             else if(opp == 2)
-                {
-                    char tipoBusca[10], parametro[100];
-                    printf("\nEscreva o tipo de busca (genero ou autor): ");
-                    scanf("%s", tipoBusca); //usuário escolhe o tipo de busca
-                    printf("Escreva o %s: ", tipoBusca);
-                    scanf(" %[^\n]", parametro); //usuário digita o titulo ou isbn do livro
+            {
+                char tipoBusca[10], parametro[100];
+                printf("\nEscreva o tipo de busca (genero ou autor): ");
+                scanf("%s", tipoBusca); //usuário escolhe o tipo de busca
+                printf("Escreva o %s: ", tipoBusca);
+                 scanf(" %[^\n]", parametro); //usuário digita o titulo ou isbn do livro
 
-                    listarLivros(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de listar livros por genero ou autor
-                }
+                listarLivros(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de listar livros por genero ou autor
+            }
 
             printf("\nDeseja algo mais?(s/n) ");
             scanf("%s", &repetir);
@@ -702,6 +705,6 @@ int main()
 
         }while (repetir == 's');
     } 
-    
+
     return 0;
 }
