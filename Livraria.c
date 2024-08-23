@@ -304,9 +304,9 @@ void cadastrarLivro(struct Livro livros[], int *quantidadeTotal) // Função par
     fgets(novoLivro.titulo, sizeof(novoLivro.titulo), stdin);
     novoLivro.titulo[strcspn(novoLivro.titulo, "\n")] = 0;
 
-    printf("Digite o autor do livro: ");
-    fgets(novoLivro.autor, sizeof(novoLivro.autor), stdin);
-    novoLivro.autor[strcspn(novoLivro.autor, "\n")] = 0;
+    printf("Digite o autor do livro: "); 
+    fgets(novoLivro.autor, sizeof(novoLivro.autor), stdin); //fgets lê o título do livro digitado e o armazena em novoLivro
+    novoLivro.autor[strcspn(novoLivro.autor, "\n")] = 0; //substitui o \n por \0, removendo a nova linha da string, garantindo que esteja formatado corretamente.
 
     printf("Digite o ISBN do livro: ");
     fgets(novoLivro.isbn, sizeof(novoLivro.isbn), stdin);
@@ -324,10 +324,70 @@ void cadastrarLivro(struct Livro livros[], int *quantidadeTotal) // Função par
 
     getchar(); // Consumir o caractere de nova linha residual
 
-    livros[*quantidadeTotal] = novoLivro;
-    (*quantidadeTotal)++;
+    livros[*quantidadeTotal] = novoLivro; //cadastra os novos dados do livro cadastrado no vetor Livros
+    (*quantidadeTotal)++; //incrementa a quantidade total de livros
 
     printf("Livro cadastrado com sucesso!\n");
+}
+
+void atualizarLivro(struct Livro livros[], int quantidadeTotal, char parametro[], char tipoBusca[]) // Função para atualizar as informações de um livro
+{
+    int encontrado = 0;
+
+    for (int i = 0; i < quantidadeTotal; i++) {
+        if ((strcmp(tipoBusca, "titulo") == 0 && strcmp(livros[i].titulo, parametro) == 0) ||
+            (strcmp(tipoBusca, "isbn") == 0 && strcmp(livros[i].isbn, parametro) == 0)) {
+            encontrado = 1;
+
+            printf("Livro encontrado! O que voce gostaria de atualizar?\n");
+            printf("[1] - Titulo\n[2] - Autor\n[3] - Genero\n[4] - Preco\n[5] - Quantidade\nDigite: ");
+            
+            int opcao;
+            scanf("%d", &opcao);
+
+            if (opcao == 1) 
+            {
+                printf("Digite o novo titulo: ");
+                scanf(" %[^\n]", livros[i].titulo);
+            } 
+
+            else if (opcao == 2) 
+            {
+                printf("Digite o novo autor: ");
+                scanf(" %[^\n]", livros[i].autor);
+            } 
+
+            else if (opcao == 3) 
+            {
+                printf("Digite o novo genero: ");
+                scanf(" %[^\n]", livros[i].genero);
+            } 
+
+            else if (opcao == 4) 
+            {
+                printf("Digite o novo preco: ");
+                scanf("%f", &livros[i].preco);
+            } 
+
+            else if (opcao == 5) 
+            {
+                printf("Digite a nova quantidade: ");
+                scanf("%d", &livros[i].quantidade);
+            } 
+            else 
+            {
+                printf("Opção invalida.\n");
+                return;
+            }
+
+            printf("Informacoes atualizadas com sucesso!\n");
+            return;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Livro nao encontrado.\n");
+    }
 }
 
 int main() 
@@ -391,7 +451,7 @@ int main()
 
     if(op == 1) 
     {
-        printf("\nAntes de prosseguirmos, precisamos que voce digite a senha do sistema: ");
+        printf("\nDigite a senha do sistema: ");
         scanf("%d", &senhaUsuario);
 
         while (senha != senhaUsuario)
@@ -499,11 +559,11 @@ int main()
             {
                 int opp;
                 printf("\nO que deseja fazer?");
-                printf("\n\n\tMENU\n\n[1] - Calcular Receita\n[2] - Cadastrar novo livro");
+                printf("\n\n\tMENU\n\n[1] - Calcular Receita\n[2] - Cadastrar novo livro\n[3] - Atualizar informacao de livro");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
 
-                while(opp>2 || opp<1)
+                while(opp>3 || opp<1)
             {
                 printf("\nOpção invalida, tente novamente: ");
                 scanf("%d", &opp);
@@ -518,7 +578,7 @@ int main()
                 else if(opp == 2) 
                 {
                     getchar(); // Limpa o buffer de entrada
-                    cadastrarLivro(livros, &quantidadeTotal);
+                    cadastrarLivro(livros, &quantidadeTotal); // chama a função para cadastrar um novo livro
 
                     // Para verificar se o livro foi cadastrado corretamente
                     printf("Titulo cadastrado: %s\n", livros[quantidadeTotal - 1].titulo);
@@ -527,6 +587,17 @@ int main()
                     printf("Genero cadastrado: %s\n", livros[quantidadeTotal - 1].genero);
                     printf("Preco cadastrado: %.2f\n", livros[quantidadeTotal - 1].preco);
                     printf("Quantidade cadastrada: %d\n", livros[quantidadeTotal - 1].quantidade);
+                }
+
+                else if(opp == 3)
+                {
+                    char tipoBusca[10], parametro[100];
+                    printf("\nEscreva o tipo de busca (titulo ou isbn): ");
+                    scanf("%s", tipoBusca); //usuário escolhe o tipo de busca
+                    printf("Escreva o %s: ", tipoBusca);
+                    scanf(" %[^\n]", parametro); //usuário digita o titulo ou isbn do livro
+
+                    atualizarLivro(livros, quantidadeTotal, parametro, tipoBusca); //chama a função de listar livros por genero ou autor
                 }
 
                 printf("\nDeseja algo mais?(s/n) ");
