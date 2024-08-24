@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 #include <ctype.h>  // Para usar strcasecmp
 
 struct Livro //cria uma estruct para armazenar informações de livros
@@ -341,7 +342,7 @@ void atualizarLivro(struct Livro livros[], int quantidadeTotal, char parametro[]
             (strcmp(tipoBusca, "isbn") == 0 && strcmp(livros[i].isbn, parametro) == 0)) {
             encontrado = 1;
 
-            printf("Livro encontrado! O que voce gostaria de atualizar?\n");
+            printf("Livro encontrado! O que você gostaria de atualizar?\n");
             printf("[1] - Titulo\n[2] - Autor\n[3] - Genero\n[4] - Preco\n[5] - Quantidade\nDigite: ");
             
             int opcao;
@@ -430,6 +431,7 @@ int main()
     {"As Vinhas da Ira", "John Steinbeck", "Drama", "2829303132334", 5, 43.30}
 }; //livros cadastrados no sistema
 
+    setlocale(LC_ALL,"Portuguese_Brazil");
     int quantidadeTotal = 30; //vamos fazer de conta que exista apenas 30 livros no sistema da livraria
     int senha = 123, senhaUsuario;
     char repetir;
@@ -481,7 +483,6 @@ int main()
             do
             {
                 int opp;
-                printf("\nO que deseja fazer?");
                 printf("\n\n\tMENU\n\n[1] - Pesquisar dados de livro\n[2] - Remover livro do sistema\n[3] - Disponibilidade de exemplar\n");
                 printf("[4] - Registro de venda\n[5] - Listar livros por autor ou genero");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
@@ -562,7 +563,6 @@ int main()
             do
             {
                 int opp;
-                printf("\nO que deseja fazer?");
                 printf("\n\n\tMENU\n\n[1] - Calcular Receita\n[2] - Cadastrar novo livro\n[3] - Atualizar informacao de livro");
                 printf("\nDigite: "); //usuário escolhe oque ele quer fazer no sistema
                 scanf("%d", &opp);
@@ -641,7 +641,7 @@ int main()
                 if(opp == 2) //opção de reabastecer o estoque
                 {
                     char tipoBusca[10], parametro[100];
-                    printf("\nEscreva o tipo de busca (titulo, autor, genero, isbn): ");
+                    printf("\nEscreva o tipo de busca (titulo ou isbn): ");
                     scanf("%s", tipoBusca); //usuário escolhe o tipo de busca
                     printf("Escreva o %s: ", tipoBusca);
                     scanf(" %[^\n]", parametro); //usuário 
