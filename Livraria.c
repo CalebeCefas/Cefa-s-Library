@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include <ctype.h>  // Para usar strcasecmp
+#include <ctype.h>
 
 struct Livro //cria uma struct para armazenar informações de livros
 {
